@@ -6,12 +6,20 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     color: 'black',
     marginTop: 20,
+    textAlign: 'center',
   },
   contanir: {
     marginLeft: 5,
   },
-
+  main: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
   titleText: {
-    color: 'black',
+    color: 'grey',
+    fontSize: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 250,
   },
 });

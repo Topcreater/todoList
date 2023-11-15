@@ -14,6 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 import {onDisplayNotification} from '../../components/Notification';
 import CardItem from '../../components/Card';
 import {CardType} from '../../types/allTypes';
+import Header from '../../components/Header';
 const CurrentTodos = () => {
   const todos = useTodoStore(state => state.todos);
   const deleteTodo = useTodoStore(state => state.deleteTodo);
@@ -66,18 +67,15 @@ const CurrentTodos = () => {
   );
 
   return (
-    <View>
-      <View style={styles.contanir}>
-        <Text style={styles.heading}>Edit your list</Text>
-        <View></View>
-        <FlatList
-          data={todos}
-          ListEmptyComponent={
-            <Text style={styles.titleText}>Nothing is downloaded.....</Text>
-          }
-          renderItem={renderItem}
-        />
-      </View>
+    <View style={styles.main}>
+      <Header title="Edit your Task" />
+      <FlatList
+        data={todos}
+        ListEmptyComponent={
+          <Text style={styles.titleText}>Nothing is downloaded.....</Text>
+        }
+        renderItem={renderItem}
+      />
     </View>
   );
 };

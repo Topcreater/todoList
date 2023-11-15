@@ -8,6 +8,9 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import {CardType} from '../types/allTypes';
+import deleteIcon from '../assests/icons/trash.png';
+import editIcon from '../assests/icons/clipboard.png';
+import MarkIcon from '../assests/icons/checkmark.png';
 
 const CardItem = ({
   item,
@@ -30,15 +33,24 @@ const CardItem = ({
         </View>
         <View>
           <TouchableOpacity onPress={() => handleDeleteTodo(index)}>
-            <Text style={styles.actionText}>delete</Text>
+            <Image
+              source={deleteIcon}
+              style={{height: 25, width: 25, marginTop: 10}}
+            />
           </TouchableOpacity>
           {showButtons && (
             <View>
               <TouchableOpacity onPress={() => handleEditTodo(index)}>
-                <Text style={styles.actionText}>Edit</Text>
+                <Image
+                  source={editIcon}
+                  style={{height: 25, width: 25, marginTop: 10}}
+                />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleAddTodo(item, index)}>
-                <Text style={styles.actionText}>Mark</Text>
+                <Image
+                  source={MarkIcon}
+                  style={{height: 25, width: 25, marginTop: 10}}
+                />
               </TouchableOpacity>
             </View>
           )}
@@ -57,7 +69,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: 20,
     justifyContent: 'space-between',
-    backgroundColor: '#9D9D9D',
+    backgroundColor: '#FFF8C9',
     marginRight: 10,
     borderRadius: 10,
     paddingVertical: 10,
@@ -77,6 +89,7 @@ export const styles = StyleSheet.create({
   },
   titleText: {
     color: 'black',
+    marginTop: 5,
   },
   sizeText: {
     color: 'black',

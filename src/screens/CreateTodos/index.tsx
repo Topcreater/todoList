@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   Button,
+  Alert,
 } from 'react-native';
 import {styles} from './styles';
 import {useTodoStore} from '../../store/dataStore';
@@ -27,15 +28,17 @@ const CreateTodos = () => {
   const [open, setOpen] = useState(false);
   const navigation = useNavigation<any>();
   const handleAddTodo = () => {
+    if (!title || !description || !date || !image) {
+      Alert.alert('Incomplete Data', 'Please fill in all required fields.');
+      return;
+    }
     const updatedData = {title, description, image, date};
-
     if (index !== undefined) {
       editTodo(index, updatedData);
     } else {
       addTodo(updatedData);
     }
 
-    // Reset the state
     setTitle('');
     setDescription('');
     setImage(null);
@@ -66,6 +69,7 @@ const CreateTodos = () => {
       <ScrollView>
         <View style={styles.contanire}>
           <Text style={styles.heading}>Create Todo Lists</Text>
+          <Text style={styles.label}>What is to be done?</Text>
           <TextInput
             style={styles.InputText}
             editable
@@ -74,6 +78,7 @@ const CreateTodos = () => {
             value={title}
             onChangeText={text => setTitle(text)}
           />
+          <Text style={styles.label}>Describ your plan?</Text>
           <TextInput
             style={styles.InputText}
             editable
@@ -82,41 +87,55 @@ const CreateTodos = () => {
             value={description}
             onChangeText={text => setDescription(text)}
           />
-          <Text style={styles.heading}>Upload image</Text>
-
-          <Image
-            source={image}
-            style={{
-              width: 150,
-              height: 150,
-              marginTop: 20,
-              borderColor: 'black',
-              borderWidth: 2,
-            }}
-          />
-
+          <Text style={styles.label}>Upload image</Text>
           <TouchableOpacity onPress={handleImageUpload}>
-            <Text style={styles.btnContainr}>Select Image</Text>
+            {image ? (
+              <Image
+                source={image}
+                style={{
+                  width: 300,
+                  height: 150,
+                  marginTop: 20,
+                  borderColor: 'black',
+                  borderWidth: 2,
+                }}
+              />
+            ) : (
+              <Text
+                style={{
+                  width: 300,
+                  height: 150,
+                  marginTop: 20,
+                  borderColor: 'gray',
+                  borderWidth: 2,
+                  color: 'gray',
+                  textAlign: 'center',
+                  textAlignVertical: 'center',
+                }}>
+                No Image Selected
+              </Text>
+            )}
           </TouchableOpacity>
-          <Text style={styles.heading}>
-            Select a date and time for your reminder:
-          </Text>
-          <Button title="Opens" onPress={() => setOpen(true)} />
-          <DatePicker
-            modal
-            open={open}
-            date={date}
-            onConfirm={date => {
-              setOpen(false);
-              setDate(date);
-            }}
-            onCancel={() => {
-              setOpen(false);
-            }}
-          />
-          <Text style={{color: 'black', fontSize: 20}}>
-            {date.toLocaleString()}
-          </Text>
+
+          <Text style={styles.label}>Due date</Text>
+          <TouchableOpacity onPress={() => setOpen(true)}>
+            <Text style={styles.DateText}>
+              {date ? date.toLocaleString() : ' Date not set'}
+            </Text>
+            <DatePicker
+              modal
+              open={open}
+              date={date}
+              onConfirm={date => {
+                setOpen(false);
+                setDate(date);
+              }}
+              onCancel={() => {
+                setOpen(false);
+              }}
+            />
+          </TouchableOpacity>
+          <Text style={styles.label}>No Notification if date not set</Text>
           <View style={{display: 'flex'}}>
             <TouchableOpacity onPress={handleAddTodo}>
               <Text style={styles.btnContainr}>Add</Text>

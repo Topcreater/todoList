@@ -3,6 +3,7 @@ import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import {useCompleteDataStore} from '../../store/completeData';
 import {styles} from './style';
 import CardItem from '../../components/Card';
+import Header from '../../components/Header';
 const CompleteTodos = () => {
   const deleteComplete = useCompleteDataStore(state => state.deleteComplete);
   const complete = useCompleteDataStore(state => state.complete);
@@ -21,8 +22,8 @@ const CompleteTodos = () => {
     />
   );
   return (
-    <View style={styles.contanir}>
-      <Text style={styles.heading}>Edit your list</Text>
+    <View style={styles.main}>
+      <Header title="Compeleted Task" />
       <FlatList
         data={complete}
         ListEmptyComponent={
