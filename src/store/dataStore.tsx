@@ -1,6 +1,6 @@
-// store.js
 import {create} from 'zustand';
 import {persist} from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useTodoStore = create(
   persist(
@@ -17,6 +17,6 @@ export const useTodoStore = create(
       deleteTodo: index =>
         set(state => ({todos: state.todos.filter((_, i) => i !== index)})),
     }),
-    {name: 'todo-storage'},
+    {name: 'todo-storage', getStorage: () => AsyncStorage},
   ),
 );

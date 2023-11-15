@@ -7,9 +7,13 @@ import CurrentTodos from '../screens/ CurrentTodos';
 import CreateTodos from '../screens/CreateTodos';
 import CompleteTodos from '../screens/CompleteTodos';
 import 'react-native-gesture-handler';
-import createIcon from '../assests/icons/add-file.png';
-import CompleteIcon from '../assests/icons/clipboard.png';
-import ViewIcon from '../assests/icons/file.png';
+import createIconHover from '../assests/icons/createHover.png';
+import createIcon from '../assests/icons/createe.png';
+import CompleteIcon from '../assests/icons/view.png';
+import CompleteIconHover from '../assests/icons/viewHover.png';
+import editIcon from '../assests/icons/edit.png';
+import editIconHover from '../assests/icons/editHover.png';
+
 import {Image} from 'react-native';
 
 const Tab = createBottomTabNavigator();
@@ -32,10 +36,10 @@ export default function AppNavigator() {
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: true,
-          tabBarActiveTintColor: '#FF7C84',
+          tabBarActiveTintColor: '#fff',
           tabBarInactiveTintColor: 'black',
           tabBarStyle: {
-            backgroundColor: '#11A3C9',
+            backgroundColor: '#89CFF3',
             alignItems: 'center',
             height: 65,
           },
@@ -44,7 +48,6 @@ export default function AppNavigator() {
           },
           tabBarLabelStyle: {
             marginBottom: 10,
-            color: 'black',
           },
         }}>
         <Tab.Screen
@@ -53,7 +56,10 @@ export default function AppNavigator() {
           options={{
             headerShown: false,
             tabBarIcon: ({focused}) => (
-              <Image source={CompleteIcon} style={{width: 24, height: 24}} />
+              <Image
+                source={focused ? CompleteIconHover : CompleteIcon}
+                style={{width: 28, height: 28}}
+              />
             ),
             tabBarLabel: 'Current',
           }}
@@ -64,7 +70,10 @@ export default function AppNavigator() {
           options={{
             headerShown: false,
             tabBarIcon: ({focused}) => (
-              <Image source={createIcon} style={{width: 24, height: 24}} />
+              <Image
+                source={focused ? createIconHover : createIcon}
+                style={{width: 30, height: 30}}
+              />
             ),
             tabBarLabel: 'Create',
           }}
@@ -75,7 +84,10 @@ export default function AppNavigator() {
           options={{
             headerShown: false,
             tabBarIcon: ({focused}) => (
-              <Image source={ViewIcon} style={{width: 24, height: 24}} />
+              <Image
+                source={focused ? editIconHover : editIcon}
+                style={{width: 28, height: 28}}
+              />
             ),
             tabBarLabel: 'View',
           }}

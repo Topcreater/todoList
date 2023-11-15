@@ -16,17 +16,17 @@ import CardItem from '../../components/Card';
 import {CardType} from '../../types/allTypes';
 import Header from '../../components/Header';
 const CurrentTodos = () => {
-  const todos = useTodoStore(state => state.todos);
-  const deleteTodo = useTodoStore(state => state.deleteTodo);
-  const addComplete = useCompleteDataStore(state => state.addComplete);
+  const todos = useTodoStore((state: any) => state.todos);
+  const deleteTodo = useTodoStore((state: any) => state.deleteTodo);
+  const addComplete = useCompleteDataStore((state: any) => state.addComplete);
   const navigation = useNavigation<any>();
   const [now, setNow] = useState(new Date());
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setNow(new Date());
-    }, 1000);
-    todos.forEach((item: any) => {
+    }, 60 * 1000);
+    todos.forEach((item: any, index: number) => {
       const todoDateTime = new Date(item.date);
       if (
         todoDateTime.getFullYear() === now.getFullYear() &&
@@ -36,6 +36,7 @@ const CurrentTodos = () => {
         todoDateTime.getMinutes() === now.getMinutes()
       ) {
         onDisplayNotification(item.title, item.description);
+        handleAddTodo(item, index);
       }
     });
     return () => clearInterval(intervalId);
@@ -45,6 +46,7 @@ const CurrentTodos = () => {
     addComplete(item);
     handleDeleteTodo(index);
   };
+
   console.log(todos, 'todoS');
 
   const handleDeleteTodo = (index: number) => {
@@ -72,7 +74,7 @@ const CurrentTodos = () => {
       <FlatList
         data={todos}
         ListEmptyComponent={
-          <Text style={styles.titleText}>Nothing is downloaded.....</Text>
+          <Text style={styles.titleText}>Data is not added</Text>
         }
         renderItem={renderItem}
       />

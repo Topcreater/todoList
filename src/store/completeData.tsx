@@ -1,6 +1,6 @@
-// store.js
 import {create} from 'zustand';
 import {persist} from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useCompleteDataStore = create(
   persist(
@@ -13,6 +13,6 @@ export const useCompleteDataStore = create(
           complete: state.complete.filter((_, i) => i !== index),
         })),
     }),
-    {name: 'todo-storage'},
+    {name: 'todo-storage', getStorage: () => AsyncStorage},
   ),
 );

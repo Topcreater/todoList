@@ -12,19 +12,24 @@ import {
 import {styles} from './styles';
 import {useTodoStore} from '../../store/dataStore';
 import {useRoute} from '@react-navigation/native';
-import {DateTimePickerEvent} from '@react-native-community/datetimepicker';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import DatePicker from 'react-native-date-picker';
 import {useNavigation} from '@react-navigation/native';
+interface TodoItem {
+  title: string;
+  description: string;
+  image: any | null;
+  date: Date;
+}
 const CreateTodos = () => {
-  const route = useRoute();
+  const route = useRoute<any>();
   const {index, itemToEdit} = route.params || {};
   const [title, setTitle] = useState(itemToEdit?.title || '');
   const [description, setDescription] = useState(itemToEdit?.description || '');
   const [image, setImage] = useState(itemToEdit?.image || null);
   const [date, setDate] = useState(itemToEdit?.date || new Date());
-  const addTodo = useTodoStore(state => state.addTodo);
-  const editTodo = useTodoStore(state => state.editTodo);
+  const addTodo = useTodoStore((state: any) => state.addTodo);
+  const editTodo = useTodoStore((state: any) => state.editTodo);
   const [open, setOpen] = useState(false);
   const navigation = useNavigation<any>();
   const handleAddTodo = () => {
@@ -90,30 +95,9 @@ const CreateTodos = () => {
           <Text style={styles.label}>Upload image</Text>
           <TouchableOpacity onPress={handleImageUpload}>
             {image ? (
-              <Image
-                source={image}
-                style={{
-                  width: 300,
-                  height: 150,
-                  marginTop: 20,
-                  borderColor: 'black',
-                  borderWidth: 2,
-                }}
-              />
+              <Image source={image} style={styles.UploadImage} />
             ) : (
-              <Text
-                style={{
-                  width: 300,
-                  height: 150,
-                  marginTop: 20,
-                  borderColor: 'gray',
-                  borderWidth: 2,
-                  color: 'gray',
-                  textAlign: 'center',
-                  textAlignVertical: 'center',
-                }}>
-                No Image Selected
-              </Text>
+              <Text style={styles.UploadImage}>No Image Selected</Text>
             )}
           </TouchableOpacity>
 

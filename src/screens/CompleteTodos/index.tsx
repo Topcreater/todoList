@@ -5,8 +5,10 @@ import {styles} from './style';
 import CardItem from '../../components/Card';
 import Header from '../../components/Header';
 const CompleteTodos = () => {
-  const deleteComplete = useCompleteDataStore(state => state.deleteComplete);
-  const complete = useCompleteDataStore(state => state.complete);
+  const deleteComplete = useCompleteDataStore(
+    (state: any) => state.deleteComplete,
+  );
+  const complete = useCompleteDataStore((state: any) => state.complete);
 
   const handleDeleteTodo = (index: number) => {
     deleteComplete(index);
@@ -27,7 +29,7 @@ const CompleteTodos = () => {
       <FlatList
         data={complete}
         ListEmptyComponent={
-          <Text style={styles.titleText}>Nothing is downloaded.....</Text>
+          <Text style={styles.titleText}>Data Not completed</Text>
         }
         renderItem={renderItem}
       />

@@ -8,8 +8,8 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import {CardType} from '../types/allTypes';
-import deleteIcon from '../assests/icons/trash.png';
-import editIcon from '../assests/icons/clipboard.png';
+import deleteIcon from '../assests/icons/Delete.png';
+import editIcon from '../assests/icons/edit.png';
 import MarkIcon from '../assests/icons/checkmark.png';
 
 const CardItem = ({
@@ -31,28 +31,23 @@ const CardItem = ({
           <Text style={styles.sizeText}>{item.description}</Text>
           <Text style={styles.sizeText}>{item.date.toLocaleString()}</Text>
         </View>
-        <View>
+        <View style={{justifyContent: 'space-around', alignItems: 'center'}}>
           <TouchableOpacity onPress={() => handleDeleteTodo(index)}>
-            <Image
-              source={deleteIcon}
-              style={{height: 25, width: 25, marginTop: 10}}
-            />
+            <Image source={deleteIcon} style={{}} />
           </TouchableOpacity>
-          {showButtons && (
+          {showButtons ? (
             <View>
               <TouchableOpacity onPress={() => handleEditTodo(index)}>
-                <Image
-                  source={editIcon}
-                  style={{height: 25, width: 25, marginTop: 10}}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleAddTodo(item, index)}>
-                <Image
-                  source={MarkIcon}
-                  style={{height: 25, width: 25, marginTop: 10}}
-                />
+                <Image source={editIcon} style={{marginTop: 10}} />
               </TouchableOpacity>
             </View>
+          ) : (
+            // <TouchableOpacity onPress={() => handleAddTodo(item, index)}>
+            <Image
+              source={MarkIcon}
+              style={{height: 25, width: 25, marginTop: 10}}
+            />
+            // </TouchableOpacity>
           )}
         </View>
       </View>
@@ -69,7 +64,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: 20,
     justifyContent: 'space-between',
-    backgroundColor: '#FFF8C9',
+    backgroundColor: '#CDF5FD',
     marginRight: 10,
     borderRadius: 10,
     paddingVertical: 10,

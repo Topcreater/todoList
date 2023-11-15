@@ -1,6 +1,9 @@
 import notifee from '@notifee/react-native';
 
-export async function onDisplayNotification(title, description) {
+export async function onDisplayNotification(
+  title: string,
+  description: string,
+) {
   const channelId = await notifee.createChannel({
     id: 'default',
     name: 'Default Channel',
@@ -13,6 +16,7 @@ export async function onDisplayNotification(title, description) {
     body: description,
     android: {
       channelId,
+      sound: 'default',
     },
   });
 
@@ -23,6 +27,7 @@ export async function onDisplayNotification(title, description) {
     body: description,
     android: {
       channelId,
+      sound: 'default',
     },
   });
 }
