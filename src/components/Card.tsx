@@ -18,7 +18,7 @@ const CardItem = ({
   handleDeleteTodo,
   handleEditTodo,
   handleAddTodo,
-  showButtons = true,
+  fileType,
 }: CardType) => {
   return (
     <View style={styles.contanir}>
@@ -35,20 +35,21 @@ const CardItem = ({
           <TouchableOpacity onPress={() => handleDeleteTodo(index)}>
             <Image source={deleteIcon} style={{}} />
           </TouchableOpacity>
-          {showButtons ? (
+          {fileType === 'CurrentTodos' ? (
             <View>
               <TouchableOpacity onPress={() => handleEditTodo(index)}>
                 <Image source={editIcon} style={{marginTop: 10}} />
               </TouchableOpacity>
             </View>
-          ) : (
-            // <TouchableOpacity onPress={() => handleAddTodo(item, index)}>
-            <Image
-              source={MarkIcon}
-              style={{height: 25, width: 25, marginTop: 10}}
-            />
-            // </TouchableOpacity>
-          )}
+          ) : fileType === 'Model' ? (
+            // Render content for the second file
+            <TouchableOpacity onPress={() => handleAddTodo(item, index)}>
+              <Image
+                source={MarkIcon}
+                style={{height: 25, width: 25, marginTop: 10}}
+              />
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     </View>

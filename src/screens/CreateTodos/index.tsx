@@ -37,6 +37,11 @@ const CreateTodos = () => {
       Alert.alert('Incomplete Data', 'Please fill in all required fields.');
       return;
     }
+    const currentDate = new Date();
+    if (date < currentDate) {
+      Alert.alert('Invalid Date', 'Please select a future date and time.');
+      return;
+    }
     const updatedData = {title, description, image, date};
     if (index !== undefined) {
       editTodo(index, updatedData);

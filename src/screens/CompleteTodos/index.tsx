@@ -20,7 +20,7 @@ const CompleteTodos = () => {
       handleDeleteTodo={handleDeleteTodo}
       handleEditTodo={() => {}}
       handleAddTodo={() => {}}
-      showButtons={false}
+      fileType=""
     />
   );
   return (

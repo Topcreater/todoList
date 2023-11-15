@@ -11,5 +11,5 @@ export interface CardType {
   handleDeleteTodo: (index: number) => void;
   handleEditTodo: (index: number) => void;
   handleAddTodo: (item: any, index: number) => void;
-  showButtons: boolean;
+  fileType: string;
 }

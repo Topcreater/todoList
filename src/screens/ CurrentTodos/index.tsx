@@ -15,12 +15,15 @@ import {onDisplayNotification} from '../../components/Notification';
 import CardItem from '../../components/Card';
 import {CardType} from '../../types/allTypes';
 import Header from '../../components/Header';
+import {useInReivewData} from '../../store/inReviewData';
+import Model from '../../components/Model';
 const CurrentTodos = () => {
   const todos = useTodoStore((state: any) => state.todos);
   const deleteTodo = useTodoStore((state: any) => state.deleteTodo);
-  const addComplete = useCompleteDataStore((state: any) => state.addComplete);
+  const addInReview = useInReivewData((state: any) => state.addInReview);
   const navigation = useNavigation<any>();
   const [now, setNow] = useState(new Date());
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -43,7 +46,7 @@ const CurrentTodos = () => {
   }, [now, todos]);
 
   const handleAddTodo = (item: CardType, index: number) => {
-    addComplete(item);
+    addInReview(item);
     handleDeleteTodo(index);
   };
 
@@ -64,13 +67,16 @@ const CurrentTodos = () => {
       handleDeleteTodo={handleDeleteTodo}
       handleEditTodo={handleEditTodo}
       handleAddTodo={handleAddTodo}
-      showButtons={true}
+      fileType="CurrentTodos"
     />
   );
 
   return (
     <View style={styles.main}>
       <Header title="Edit your Task" />
+      <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+        <Text style={styles.progress}>In progress task </Text>
+      </TouchableOpacity>
       <FlatList
         data={todos}
         ListEmptyComponent={
@@ -78,6 +84,7 @@ const CurrentTodos = () => {
         }
         renderItem={renderItem}
       />
+      <Model modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </View>
   );
 };
